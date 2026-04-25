@@ -25,7 +25,7 @@ public class ProductService {
     // Constructor to initialize sample data
     public ProductService() {
         products.add(new Product(1L, "Laptop", "Gaming laptop", 75000, "Electronics", 10, null));
-        products.add(new Product(2L, "Phone", "Smartphone", 30000, "Electronics", 20, null));
+        products.add(new Product(2L, "Phone", "Smartphone", 30000, "Electronics", 20, (String) null));
         products.add(new Product(3L, "Headphones", "Wireless headphones", 2500, "Accessories", 50, null));
         products.add(new Product(4L, "Keyboard", "Mechanical keyboard", 3500, "Accessories", 30, null));
         products.add(new Product(5L, "Mouse", "Gaming mouse", 1500, "Accessories", 40, null));
