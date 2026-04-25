@@ -13,13 +13,23 @@ import java.util.List;
 @RequestMapping("/api/v1/products")
 public class ProductController {
 
+    /*
+     HTTP Status Codes Used:
+     200 OK -> successful retrieval/update
+     201 Created -> successful creation
+     204 No Content -> successful deletion
+     400 Bad Request -> invalid request data
+     404 Not Found -> requested product does not exist
+     500 Internal Server Error -> unexpected server-side failure
+    */
+
     private final ProductService productService;
 
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
 
-    // GET all products
+    // GET all products -> 200 OK / 500 Internal Server Error
     @GetMapping
     public ResponseEntity<List<Product>> getAllProducts() {
         try {
@@ -29,7 +39,7 @@ public class ProductController {
         }
     }
 
-    // GET product by ID
+    // GET product by ID -> 200 OK / 404 Not Found / 500 Internal Server Error
     @GetMapping("/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable Long id) {
         try {
@@ -45,7 +55,7 @@ public class ProductController {
         }
     }
 
-    // FILTER products
+    // FILTER products -> 200 OK / 400 Bad Request
     @GetMapping("/filter")
     public ResponseEntity<List<Product>> filterProducts(
             @RequestParam String filterType,
@@ -72,7 +82,7 @@ public class ProductController {
         }
     }
 
-    // CREATE product
+    // CREATE product -> 201 Created / 400 Bad Request / 500 Internal Server Error
     @PostMapping
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
         try {
@@ -88,7 +98,7 @@ public class ProductController {
         }
     }
 
-    // PUT
+    // PUT replace product -> 200 OK / 404 Not Found / 500 Internal Server Error
     @PutMapping("/{id}")
     public ResponseEntity<Product> updateProduct(
             @PathVariable Long id,
@@ -108,7 +118,7 @@ public class ProductController {
         }
     }
 
-    // PATCH
+    // PATCH partial update -> 200 OK / 404 Not Found / 500 Internal Server Error
     @PatchMapping("/{id}")
     public ResponseEntity<Product> patchProduct(
             @PathVariable Long id,
@@ -135,7 +145,7 @@ public class ProductController {
         }
     }
 
-    // DELETE
+    // DELETE product -> 204 No Content / 404 Not Found / 500 Internal Server Error
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         try {
