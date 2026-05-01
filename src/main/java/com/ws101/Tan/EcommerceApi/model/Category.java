@@ -30,7 +30,4 @@ public class Category {
             fetch = FetchType.LAZY
     )
     private List<Product> products;
-
-    public boolean equalsIgnoreCase(String category) {
-    }
 }

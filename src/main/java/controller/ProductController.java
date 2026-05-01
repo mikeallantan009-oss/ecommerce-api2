@@ -1,7 +1,7 @@
 package com.ws101.Tan.EcommerceApi.controller;
 
-
 import com.ws101.Tan.EcommerceApi.model.Product;
+import com.ws101.Tan.EcommerceApi.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,9 +23,9 @@ public class ProductController {
      500 Internal Server Error - unexpected error
     */
 
-    private final com.ws101.Tan.EcommerceApi.service.ProductRepository productService;
+    private final ProductService productService;
 
-    public ProductController(com.ws101.Tan.EcommerceApi.service.ProductRepository productService) {
+    public ProductController(ProductService productService) {
         this.productService = productService;
     }
 
@@ -64,8 +64,9 @@ public class ProductController {
 
         try {
             List<Product> result = switch (filterType.toLowerCase()) {
+
                 case "category" -> productService.filterByCategory(filterValue);
-                case "name" -> productService.filterByName(filterValue);
+
                 case "price" -> {
                     String[] range = filterValue.split("-");
                     yield productService.filterByPrice(
@@ -73,6 +74,7 @@ public class ProductController {
                             Double.parseDouble(range[1])
                     );
                 }
+
                 default -> List.of();
             };
 
@@ -135,7 +137,9 @@ public class ProductController {
             if (product.getStockQuantity() != 0) existing.setStockQuantity(product.getStockQuantity());
             if (product.getImageUrl() != null) existing.setImageUrl(product.getImageUrl());
 
-            return ResponseEntity.ok(existing);
+            Product updated = productService.updateProduct(id, existing);
+
+            return ResponseEntity.ok(updated);
 
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
