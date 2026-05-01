@@ -50,7 +50,7 @@ async function renderProducts() {
         <div class="product-card">
             <h2>${product.name}</h2>
             <p>${product.description ?? "No description available"}</p>
-            <p><strong>Price:</strong> ₱${product.price}</p>
+            <p><strong>Price:</strong> ${product.price}$</p>
             <p><strong>Stock:</strong> ${product.stockQuantity}</p>
         </div>
     `).join("");
