@@ -2,7 +2,6 @@ package com.ws101.Tan.EcommerceApi.controller;
 
 
 import com.ws101.Tan.EcommerceApi.model.Product;
-import com.ws101.Tan.EcommerceApi.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,9 +23,9 @@ public class ProductController {
      500 Internal Server Error - unexpected error
     */
 
-    private final ProductService productService;
+    private final com.ws101.Tan.EcommerceApi.service.ProductRepository productService;
 
-    public ProductController(ProductService productService) {
+    public ProductController(com.ws101.Tan.EcommerceApi.service.ProductRepository productService) {
         this.productService = productService;
     }
 
