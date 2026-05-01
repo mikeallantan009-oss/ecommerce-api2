@@ -1,6 +1,6 @@
 package com.ws101.Tan.EcommerceApi.model;
 
-
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,11 +9,15 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+@Entity
+@Table(name = "products")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Product {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank(message = "Product name is required and must not be empty")
@@ -25,8 +29,14 @@ public class Product {
     @Min(value = 1, message = "Price must be a positive number")
     private Double price;
 
-    @NotBlank(message = "Category is required")
-    private String category;
+    /**
+     * Product entity representing items available in the e-commerce system.
+     * Many Products belong to one Category.
+     */
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     @Min(value = 0, message = "Stock quantity must be non-negative")
     private int stockQuantity;
