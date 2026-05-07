@@ -27,6 +27,9 @@ dependencies {
 	// Spring Data JPA (REQUIRED FOR LAB)
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
+	// Spring Security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
 	// MySQL Driver (REQUIRED FOR LAB)
 	runtimeOnly 'com.mysql:mysql-connector-j'
 
@@ -36,6 +39,7 @@ dependencies {
 
 	// Testing
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	runtimeOnly 'com.mysql:mysql-connector-j'
