@@ -1,5 +1,6 @@
 package com.ws101.Tan.EcommerceApi.controller;
 
+import com.ws101.Tan.EcommerceApi.dto.CreateProductDto;
 import com.ws101.Tan.EcommerceApi.model.Product;
 import com.ws101.Tan.EcommerceApi.service.ProductService;
 import jakarta.validation.Valid;
@@ -88,9 +89,20 @@ public class ProductController {
 
     // CREATE product (VALIDATED)
     @PostMapping
-    public ResponseEntity<Product> createProduct(@Valid @RequestBody Product product) {
+    public ResponseEntity<Product> createProduct(@Valid @RequestBody CreateProductDto product) {
         try {
-            Product created = productService.createProduct(product);
+
+            Product newProduct = new Product();
+
+            newProduct.setName(product.name());
+            newProduct.setDescription(product.description());
+            newProduct.setPrice(product.price());
+            newProduct.setCategory(product.category());
+            newProduct.setStockQuantity(product.stockQuantity());
+            newProduct.setImageUrl(product.imageUrl());
+
+            Product created = productService.createProduct(newProduct);
+
             return ResponseEntity.status(HttpStatus.CREATED).body(created);
 
         } catch (Exception e) {
@@ -134,7 +146,7 @@ public class ProductController {
             if (product.getName() != null) existing.setName(product.getName());
             if (product.getDescription() != null) existing.setDescription(product.getDescription());
             if (product.getPrice() != 0) existing.setPrice(product.getPrice());
-            if (product.getCategory() != null) existing.setCategory(product.getCategory());
+            if (product.getCategory() != null) existing.setCategory(String.valueOf(product.getCategory()));
             if (product.getStockQuantity() != 0) existing.setStockQuantity(product.getStockQuantity());
             if (product.getImageUrl() != null) existing.setImageUrl(product.getImageUrl());
 

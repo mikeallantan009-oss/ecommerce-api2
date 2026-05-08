@@ -1,5 +1,6 @@
 package com.ws101.Tan.EcommerceApi.dto;
 
+import com.ws101.Tan.EcommerceApi.model.Product;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 

@@ -29,6 +29,8 @@ public class SecurityConfig {
 
                         .requestMatchers(HttpMethod.GET, "/api/v1/products").permitAll()
 
+                        .requestMatchers(HttpMethod.POST, "/api/v1/products").permitAll()
+
                         .requestMatchers("/api/v1/auth/register").permitAll()
 
                         .requestMatchers(HttpMethod.POST, "/api/v1/orders").authenticated()
@@ -42,7 +44,7 @@ public class SecurityConfig {
 
                 .logout(Customizer.withDefaults())
 
-                .csrf(Customizer.withDefaults());
+                .csrf(csrf -> csrf.disable());
 
         return http.build();
     }

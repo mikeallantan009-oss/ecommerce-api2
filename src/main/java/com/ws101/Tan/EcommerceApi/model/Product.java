@@ -47,4 +47,10 @@ public class Product {
 
     public Product(long id, String phone, String smartphone, int i, String electronics, int stockQuantity, String imageUrl) {
     }
+
+    public void setCategory(@NotBlank(message = "Category is required") String category) {
+    }
+
+    public void setCategory(Category category) {
+    }
 }
